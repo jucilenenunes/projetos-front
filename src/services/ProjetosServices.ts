@@ -6,6 +6,11 @@ const postProjeto = async (projeto: ProjetoProps) => {
     return;
 }
 
+const putProjeto = async (projeto: ProjetoProps) => {
+    await api.put(`/projetos/${projeto.id}`, projeto);
+    return;
+}
+
 const getProjetos = async () => {
     const {
         data
@@ -13,4 +18,9 @@ const getProjetos = async () => {
     return data;
 }
 
-export { getProjetos, postProjeto }
+const deleteProjeto = async (id: number) => {
+    await api.delete(`/projetos/${id}`);
+    return;
+}
+
+export { getProjetos, postProjeto, putProjeto, deleteProjeto }
