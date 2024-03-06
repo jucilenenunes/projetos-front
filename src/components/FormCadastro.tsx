@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { ProjetoProps } from "../types/ProjetoProps";
 
-const FormCadastro = ({ addProjeto }) => {
+interface FormCadastroProps {
+    addProjeto: (newProjeto: ProjetoProps) => void;
+}
+
+const FormCadastro = ({ addProjeto }: FormCadastroProps) => {
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState<string>("");
     const [responsavel, setResponsavel] = useState("");
@@ -8,7 +13,12 @@ const FormCadastro = ({ addProjeto }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(!titulo  || !descricao || !responsavel ) return; 
-        addProjeto(titulo, descricao, responsavel)
+        addProjeto({
+            id: Math.floor(Math.random() * 10000),
+            titulo,
+            descricao,
+            responsavel,
+        });
         
         setTitulo("")
         setDescricao("")

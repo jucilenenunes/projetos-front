@@ -7,27 +7,10 @@ import FormCadastro from "./components/FormCadastro";
 
 function App() {
   const [projetos, setProjetos] = useState<ProjetoProps[]>([
-    {
-      "id": 1,
-      "titulo": "Backend",
-      "descricao": "Projeto criado em Node + Nest.",
-      "responsavel": "Ju Nunes"
-  },
-  {
-      "id": 2,
-      "titulo": "Projeto 1",
-      "descricao": "Projeto 1 é sobre desenvolvimento básico.",
-      "responsavel": "Jucilene"
-  },
-  {
-      "id": 3,
-      "titulo": "Projeto teste",
-      "descricao": "Projeto teste teste teste.",
-      "responsavel": "Jucilene"
-  }
+   
   ])
 
-  const addProjeto = (newProjeto: ProjetoProps): ProjetoProps[] => {
+  const addProjeto = (newProjeto: ProjetoProps) => {
     const newProjetos = [...projetos, {
       id: Math.floor(Math.random() * 10000),
       titulo: newProjeto.titulo,
@@ -44,7 +27,7 @@ function App() {
       <div className="cadastro-projetos">
         <ListaCadastro projetos={projetos} />
       </div>
-      <FormCadastro key={projetos.id} addProjeto={addProjeto}/>
+      <FormCadastro addProjeto={addProjeto}/>
     </div>
   )
 }
