@@ -1,5 +1,5 @@
 export type ProjetoProps = {
-    id: number;
+    id?: number;
     titulo: string;
     descricao: string;
     responsavel: string;

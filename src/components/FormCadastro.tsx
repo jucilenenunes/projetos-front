@@ -14,7 +14,7 @@ const FormCadastro = ({ addProjeto }: FormCadastroProps) => {
         e.preventDefault();
         if(!titulo  || !descricao || !responsavel ) return; 
         addProjeto({
-            id: Math.floor(Math.random() * 10000),
+            id: 0,
             titulo,
             descricao,
             responsavel,
