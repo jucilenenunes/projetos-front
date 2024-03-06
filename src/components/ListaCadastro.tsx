@@ -6,18 +6,24 @@ interface ListaCadastroProps {
   editProjeto: (projeto: ProjetoProps) => void
 }
 
-
 const ListaCadastro = ({ projetos, deleteProjeto, editProjeto }: ListaCadastroProps) => {
   return projetos.map((projeto) => {
     return (
-      <div>
+      <div >
         <h2>{projeto.titulo}</h2>
-        <p>{projeto.descricao}</p>
-        <p>{projeto.responsavel}</p>
-        <button className="remove"  onClick={() => deleteProjeto(projeto.id!)}>Excluir</button>
-        <button className="edit" onClick={()=> editProjeto(projeto)}>Editar</button>
+        <div className="form-cadastro">
+          <p>{projeto.descricao}</p>
+          
+          <div>
+            <button className="remove"  onClick={() => deleteProjeto(projeto.id!)}>Excluir</button>
+            <button className="edit" onClick={()=> editProjeto(projeto)}>Editar</button>
+          </div>
+          
+        </div>
+        <div className="resp">
+          <p><strong>Responsável: </strong>{projeto.responsavel}</p>
+          </div>
       </div>
-      
     )
   });
 };
