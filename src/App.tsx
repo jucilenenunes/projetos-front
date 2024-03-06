@@ -6,7 +6,7 @@ import FormCadastro from "./components/FormCadastro";
 //import FormCadastro from "./components/FormCadastro";
 
 function App() {
-  const [projetos] = useState<ProjetoProps[]>([
+  const [projetos, setProjetos] = useState<ProjetoProps[]>([
     {
       "id": 1,
       "titulo": "Backend",
@@ -26,13 +26,25 @@ function App() {
       "responsavel": "Jucilene"
   }
   ])
+
+  const addProjeto = (newProjeto: ProjetoProps): ProjetoProps[] => {
+    const newProjetos = [...projetos, {
+      id: Math.floor(Math.random() * 10000),
+      titulo: newProjeto.titulo,
+      descricao: newProjeto.descricao,
+      responsavel: newProjeto.responsavel
+    }]
+
+    setProjetos(newProjetos)
+  }
+
   return (
     <div className="app">
       <h1>Lista de Projetos</h1>
       <div className="cadastro-projetos">
         <ListaCadastro projetos={projetos} />
       </div>
-      <FormCadastro />
+      <FormCadastro key={projetos.id} addProjeto={addProjeto}/>
     </div>
   )
 }

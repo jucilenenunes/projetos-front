@@ -1,21 +1,22 @@
 import { useState } from "react";
 
-const FormCadastro = () => {
-    const [value, setValue] = useState("");
-    const [descricao, setDescricao] = useState("");
+const FormCadastro = ({ addProjeto }) => {
+    const [titulo, setTitulo] = useState("");
+    const [descricao, setDescricao] = useState<string>("");
     const [responsavel, setResponsavel] = useState("");
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!value  || !descricao || !responsavel ) return; 
-        console.log(value, descricao, responsavel)
+        if(!titulo  || !descricao || !responsavel ) return; 
+        addProjeto(titulo, descricao, responsavel)
+        
+        setTitulo("")
+        setDescricao("")
+        setResponsavel("")
+        console.log(titulo, descricao, responsavel)
     }
 
-    const handleDescricao = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if(!value  || !descricao || !responsavel ) return; 
-        console.log(value, descricao, responsavel)
-    }
+   
 
   return (
     <div className="form-cadastro">
@@ -24,14 +25,14 @@ const FormCadastro = () => {
             <label>Título: </label>
             <input 
                 type="text" placeholder="Digite o título do projeto" 
-                value={value}
-                onChange={(e) => setValue(e.target.value) }  
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value) }  
             />
             <label>Descrição: </label>
             <textarea 
                 placeholder="Descreva sobre o projeto"
                 value={descricao}
-                onChange={(e) => setDescricao(e.target.descricao) }
+                onChange={(e) => setDescricao(e.target.value) }
             >
                 
                 </textarea>
@@ -39,7 +40,7 @@ const FormCadastro = () => {
             <input 
                 type="text" placeholder="Responsável" 
                 value={responsavel}
-                onChange={(e) => setResponsavel(e.target.responsavel) }
+                onChange={(e) => setResponsavel(e.target.value) }
             />
         <button>Cadastrar</button>
         </form>

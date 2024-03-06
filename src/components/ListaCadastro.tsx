@@ -12,6 +12,7 @@ const ListaCadastro = ({ projetos }: ListaCadastroProps) => {
       <div>
         <h2>{projeto.titulo}</h2>
         <p>{projeto.descricao}</p>
+        <p>{projeto.responsavel}</p>
         <button className="remove">Excluir</button>
         <button className="edit">Editar</button>
       </div>
