@@ -1,24 +1,39 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import { DialogModal, useModal } from "react-dialog-confirm";
 import ListaCadastro from "./components/ListaCadastro";
 import { ProjetoProps } from "./types/ProjetoProps";
 import FormCadastro from "./components/FormCadastro";
-//import FormCadastro from "./components/FormCadastro";
 import {
   deleteProjeto,
   getProjetos,
   postProjeto,
   putProjeto,
 } from "./services/ProjetosServices";
+import "./App.css";
 
 function App() {
   const [projetos, setProjetos] = useState<ProjetoProps[]>([]);
   const [projeto, setProjeto] = useState<ProjetoProps>();
+  const { openModal, closeModal  } = useModal();
 
   useEffect(() => {
     carregarProjetos();
     setProjeto(undefined);
   }, []);
+
+  const confirmDelete = (id: number) => {
+    openModal(
+      <DialogModal
+        icon="error"
+        title="Confirmação de Exclusão"
+        description="Tem certeza que deseja excluir este projeto?"
+        hasCancel={true}
+        confirm="Sim. Desejo excluir."
+        onConfirm={() => { delProjeto(id); }}
+        cancel="Não"
+      />
+    );
+  };
 
   const carregarProjetos = () => {
     getProjetos()
@@ -65,10 +80,11 @@ function App() {
     deleteProjeto(id)
       .then(() => {
         carregarProjetos();
+        closeModal();
       })
-      .catch((err) => {
-        console.log("Deu erro", err);
+      .catch(() => {
         setProjetos([]);
+        closeModal();
       });
   };
 
@@ -80,7 +96,7 @@ function App() {
     <div className="app">
       <h1>Lista de Projetos</h1>
       <div className="cadastro-projetos">
-        <ListaCadastro projetos={projetos} deleteProjeto={delProjeto} editProjeto={editProjeto} />
+        <ListaCadastro projetos={projetos} deleteProjeto={confirmDelete} editProjeto={editProjeto} />
       </div>
       <FormCadastro projeto={projeto} saveProjeto={saveProjeto} />
     </div>

@@ -111,3 +111,7 @@ input {
     border-radius: 3px;
     width: 100%;
 }
+
+button.dialog--button.dialog--button-confirm {
+    background-color: 'red' !important;
+}

@@ -7,9 +7,9 @@ interface ListaCadastroProps {
 }
 
 const ListaCadastro = ({ projetos, deleteProjeto, editProjeto }: ListaCadastroProps) => {
-  return projetos.map((projeto) => {
+  return projetos.map((projeto, ix) => {
     return (
-      <div >
+      <div key={ix}>
         <h2>{projeto.titulo}</h2>
         <div className="form-cadastro">
           <p>{projeto.descricao}</p>
